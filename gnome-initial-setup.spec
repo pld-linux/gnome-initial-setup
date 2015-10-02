@@ -5,12 +5,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	3.16.3
+Version:	3.18.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	414e251645242b0ae20fa8c88f15b2b6
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup/3.18/%{name}-%{version}.tar.xz
+# Source0-md5:	1943e709919a70fbeb72c9f16d3db909
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 0.9.6.4
@@ -40,8 +40,8 @@ BuildRequires:	libpwquality-devel
 BuildRequires:	libsecret-devel
 BuildRequires:	libtool >= 2:2
 BuildRequires:	pango-devel >= 1:1.32.5
-BuildRequires:	polkit-devel >= 0.103
 BuildRequires:	pkgconfig
+BuildRequires:	polkit-devel >= 0.103
 BuildRequires:	rest-devel >= 0.7
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
