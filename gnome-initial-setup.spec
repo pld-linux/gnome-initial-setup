@@ -17,7 +17,7 @@ BuildRequires:	NetworkManager-devel >= 0.9.6.4
 BuildRequires:	NetworkManager-gtk-lib-devel >= 0.9.6.4
 BuildRequires:	accountsservice-devel
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	cheese-devel >= 3.3.5
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdm-devel >= 3.8.3
