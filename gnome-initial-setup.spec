@@ -1,29 +1,32 @@
 #
 # Conditional build:
-%bcond_with	krb5	# MIT Kerberos 5 instead of Heimdal
+%bcond_with	krb5		# MIT Kerberos 5 instead of Heimdal
+%bcond_with	packagekit	# PackageKit support (software sources page)
 #
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	3.20.1
+Version:	3.24.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup/3.20/%{name}-%{version}.tar.xz
-# Source0-md5:	3730652bc69c0dc4479dbe049c469291
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup/3.24/%{name}-%{version}.tar.xz
+# Source0-md5:	33583c43333b7fa17e27a127353bbd12
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
-BuildRequires:	NetworkManager-devel >= 0.9.6.4
-BuildRequires:	NetworkManager-gtk-lib-devel >= 0.9.6.4
+BuildRequires:	NetworkManager-devel >= 1.2
+BuildRequires:	NetworkManager-gtk-lib-devel >= 1.0
+%{?with_packagekit:BuildRequires:	PackageKit-devel >= 1.1.4}
 BuildRequires:	accountsservice-devel
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	cheese-devel >= 3.3.5
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdm-devel >= 3.8.3
-BuildRequires:	geoclue2-devel >= 2.1.2
+BuildRequires:	geoclue2-devel >= 2.3.1
+BuildRequires:	geocode-glib-devel >= 1.0
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.36.0
+BuildRequires:	glib2-devel >= 1:2.46.0
 BuildRequires:	gnome-common
 BuildRequires:	gnome-desktop-devel >= 3.8.0
 BuildRequires:	gnome-online-accounts-devel >= 3.0
@@ -45,12 +48,13 @@ BuildRequires:	polkit-devel >= 0.103
 BuildRequires:	rest-devel >= 0.7
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	NetworkManager >= 0.9.6.4
-Requires:	NetworkManager-gtk-lib >= 0.9.6.4
+Requires:	NetworkManager >= 1.2
+Requires:	NetworkManager-gtk-lib >= 1.0
+%{?with_packagekit:Requires:	PackageKit >= 1.1.4}
 Requires:	cheese >= 3.3.5
 Requires:	gdm >= 3.8.3
-Requires:	geoclue2 >= 2.1.2
-Requires:	glib2 >= 1:2.36.0
+Requires:	geoclue2 >= 2.3.1
+Requires:	glib2 >= 1:2.46.0
 Requires:	gnome-desktop >= 3.8.0
 Requires:	gnome-online-accounts >= 3.0
 Requires:	gtk+3 >= 3.12.0
@@ -85,7 +89,8 @@ bezpieczny sposób przygotowania nowego systemu.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-silent-rules
+	--disable-silent-rules \
+	%{?with_packagekit:--enable-software-sources}
 %{__make}
 
 %install
