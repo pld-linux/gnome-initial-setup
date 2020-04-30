@@ -3,7 +3,6 @@
 # Conditional build:
 %bcond_with	krb5		# MIT Kerberos 5 instead of Heimdal
 %bcond_without	malcontent	# parental control via malcontent
-%bcond_without	packagekit	# PackageKit support (software sources page)
 #
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
@@ -18,7 +17,6 @@ Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 1.2
 BuildRequires:	NetworkManager-gtk-lib-devel >= 1.0
-%{?with_packagekit:BuildRequires:	PackageKit-devel >= 1.1.4}
 BuildRequires:	accountsservice-devel
 BuildRequires:	cheese-devel >= 3.28
 BuildRequires:	fontconfig-devel
@@ -55,7 +53,6 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	NetworkManager >= 1.2
 Requires:	NetworkManager-gtk-lib >= 1.0
-%{?with_packagekit:Requires:	PackageKit >= 1.1.4}
 Requires:	cheese >= 3.28
 Requires:	gdm >= 3.8.3
 Requires:	geoclue2 >= 2.3.1
