@@ -6,12 +6,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	3.36.4
+Version:	3.38.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup/3.36/%{name}-%{version}.tar.xz
-# Source0-md5:	3699deb08d25c08ca8135d94b6e25a7f
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup/3.38/%{name}-%{version}.tar.xz
+# Source0-md5:	d372cebf22867f5bd0d602ce0f2f76e4
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 1.2
@@ -26,8 +26,9 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.63.1
 BuildRequires:	gnome-desktop-devel >= 3.8.0
 BuildRequires:	gnome-online-accounts-devel >= 3.0
+BuildRequires:	gsettings-desktop-schemas-devel >= 3.37.1
 BuildRequires:	gtk+3-devel >= 3.12.0
-BuildRequires:	gtk-webkit4-devel >= 2.6.0
+BuildRequires:	gtk-webkit4-devel >= 2.26.0
 %{!?with_krb5:BuildRequires:	heimdal-devel}
 BuildRequires:	ibus-devel >= 1.4.99
 BuildRequires:	iso-codes
@@ -47,7 +48,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel >= 0.103
 BuildRequires:	rest-devel >= 0.7
 BuildRequires:	rpmbuild(macros) >= 1.736
-BuildRequires:	systemd-devel
+BuildRequires:	systemd-units >= 1:242
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	NetworkManager >= 1.2
@@ -58,8 +59,13 @@ Requires:	geoclue2 >= 2.3.1
 Requires:	glib2 >= 1:2.63.1
 Requires:	gnome-desktop >= 3.8.0
 Requires:	gnome-online-accounts >= 3.0
+%ifarch %{ix86} %{x8664} aarch64
+# where available
+Requires:	gnome-tour >= 3.38
+%endif
+Requires:	gsettings-desktop-schemas >= 3.37.1
 Requires:	gtk+3 >= 3.12.0
-Requires:	gtk-webkit4 >= 2.6.0
+Requires:	gtk-webkit4 >= 2.26.0
 Requires:	ibus >= 1.4.99
 Requires:	iso-codes
 Requires:	libgweather >= 3.0
@@ -70,6 +76,7 @@ Requires:	malcontent >= 0.6.0
 Requires:	pango >= 1:1.32.5
 Requires:	polkit >= 0.103
 Requires:	rest >= 0.7
+Requires:	systemd-units >= 1:242
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -104,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README TODO
+%doc NEWS README.md
 /etc/xdg/autostart/gnome-initial-setup-copy-worker.desktop
 /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
 /etc/xdg/autostart/gnome-welcome-tour.desktop
@@ -116,8 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-shell/modes/initial-setup.json
 %{_datadir}/polkit-1/rules.d/20-gnome-initial-setup.rules
 %{systemduserunitdir}/gnome-session.target.wants
-%{systemduserunitdir}/gnome-session@gnome-initial-setup.target.wants
+%{systemduserunitdir}/gnome-session@gnome-initial-setup.target.d
 %{systemduserunitdir}/gnome-initial-setup-copy-worker.service
 %{systemduserunitdir}/gnome-initial-setup-first-login.service
-%{systemduserunitdir}/gnome-initial-setup.service
 %{systemduserunitdir}/gnome-welcome-tour.service
