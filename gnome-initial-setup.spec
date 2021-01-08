@@ -6,12 +6,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	3.38.2
+Version:	3.38.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-initial-setup/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	5a8d3f281d99b5b0239e86eb1ff8e073
+# Source0-md5:	5e4dd431930204871329787bdf15f687
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 1.2
