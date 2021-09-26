@@ -6,12 +6,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	40.4
+Version:	41.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-initial-setup/40/%{name}-%{version}.tar.xz
-# Source0-md5:	79ae4bfc835e9e3a095aa64607307d81
+Source0:	https://download.gnome.org/sources/gnome-initial-setup/41/%{name}-%{version}.tar.xz
+# Source0-md5:	4fc76a50ab3440aac44eace3576c2c0b
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 1.2
@@ -41,7 +41,7 @@ BuildRequires:	libmalcontent-ui-devel >= 0.6.0
 %endif
 BuildRequires:	libpwquality-devel
 BuildRequires:	libsecret-devel >= 0.18.8
-BuildRequires:	meson >= 0.49.0
+BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pango-devel >= 1:1.32.5
 BuildRequires:	pkgconfig
