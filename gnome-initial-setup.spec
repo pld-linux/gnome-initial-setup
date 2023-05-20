@@ -16,31 +16,32 @@ Source0:	https://download.gnome.org/sources/gnome-initial-setup/43/%{name}-%{ver
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 1.2
-BuildRequires:	NetworkManager-gtk-lib-devel >= 1.0
 BuildRequires:	accountsservice-devel
 BuildRequires:	cheese-devel >= 3.28
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdm-devel >= 3.8.3
 BuildRequires:	geoclue2-devel >= 2.3.1
-BuildRequires:	geocode-glib-devel >= 1.0
+BuildRequires:	geocode-glib2-devel >= 3.26
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.63.1
 BuildRequires:	gnome-desktop4-devel >= 42
 BuildRequires:	gnome-online-accounts-devel >= 3.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.37.1
-BuildRequires:	gtk+3-devel >= 3.12.0
-BuildRequires:	gtk-webkit4-devel >= 2.26.0
+BuildRequires:	gtk4-devel >= 4.6
+# gtk-webkit6 preferreed
+BuildRequires:	gtk-webkit5-devel >= 2.34.0
 %{!?with_krb5:BuildRequires:	heimdal-devel}
 BuildRequires:	ibus-devel >= 1.4.99
 BuildRequires:	iso-codes
 BuildRequires:	json-glib-devel
 %{?with_krb5:BuildRequires:	krb5-devel}
+BuildRequires:	libadwaita-devel >= 1.2
 BuildRequires:	libgweather4-devel >= 4.0
-BuildRequires:	libhandy1-devel >= 1.5.90
 %if %{with malcontent}
 BuildRequires:	libmalcontent-devel >= 0.6.0
-BuildRequires:	libmalcontent-ui-devel >= 0.6.0
+BuildRequires:	libmalcontent-ui-devel >= 0.11.0
 %endif
+BuildRequires:	libnma-gtk4-devel >= 1.0
 BuildRequires:	libpwquality-devel
 BuildRequires:	libsecret-devel >= 0.18.8
 BuildRequires:	meson >= 0.53.0
@@ -48,7 +49,7 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	pango-devel >= 1:1.32.5
 BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel >= 0.103
-BuildRequires:	rest-devel >= 0.7
+BuildRequires:	rest1-devel >= 0.9
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	systemd-units >= 1:242
 BuildRequires:	tar >= 1:1.22
@@ -66,19 +67,20 @@ Requires:	gnome-online-accounts >= 3.0
 Requires:	gnome-tour >= 3.38
 %endif
 Requires:	gsettings-desktop-schemas >= 3.37.1
-Requires:	gtk+3 >= 3.12.0
-Requires:	gtk-webkit4 >= 2.26.0
+Requires:	gtk4 >= 4.6
+Requires:	gtk-webkit5 >= 2.34.0
 Requires:	ibus >= 1.4.99
 Requires:	iso-codes
+Requires:	libadwaita >= 1.2
 Requires:	libgweather4 >= 4.0
-Requires:	libhandy1 >= 1.5.90
 Requires:	libsecret >= 0.18.8
 %if %{with malcontent}
+Requires:	libmalcontent-ui >= 0.11.0
 Requires:	malcontent >= 0.6.0
 %endif
 Requires:	pango >= 1:1.32.5
 Requires:	polkit >= 0.103
-Requires:	rest >= 0.7
+Requires:	rest1 >= 0.9
 Requires:	systemd-units >= 1:242
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
