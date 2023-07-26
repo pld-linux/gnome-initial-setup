@@ -1,4 +1,4 @@
-# TODO: gnome-initial-setup user?
+# TODO: gnome-initial-setup user (see data/gnome-initial-setup.conf)?
 #
 # Conditional build:
 %bcond_with	krb5		# MIT Kerberos 5 instead of Heimdal
@@ -7,15 +7,15 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	43.2
+Version:	44.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-initial-setup/43/%{name}-%{version}.tar.xz
-# Source0-md5:	a330915bbf39258091e1bbc664666ca7
+Source0:	https://download.gnome.org/sources/gnome-initial-setup/44/%{name}-%{version}.tar.xz
+# Source0-md5:	16d6e7a4f943c3efd46979140126327b
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
-BuildRequires:	NetworkManager-devel >= 1.2
+BuildRequires:	NetworkManager-devel >= 2:1.2
 BuildRequires:	accountsservice-devel
 BuildRequires:	cheese-devel >= 3.28
 BuildRequires:	fontconfig-devel
@@ -28,8 +28,7 @@ BuildRequires:	gnome-desktop4-devel >= 42
 BuildRequires:	gnome-online-accounts-devel >= 3.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.37.1
 BuildRequires:	gtk4-devel >= 4.6
-# gtk-webkit6 preferreed
-BuildRequires:	gtk-webkit5-devel >= 2.34.0
+BuildRequires:	gtk-webkit6-devel >= 2.40.0
 %{!?with_krb5:BuildRequires:	heimdal-devel}
 BuildRequires:	ibus-devel >= 1.4.99
 BuildRequires:	iso-codes
@@ -54,7 +53,7 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	systemd-units >= 1:242
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	NetworkManager >= 1.2
+Requires:	NetworkManager >= 2:1.2
 Requires:	NetworkManager-gtk-lib >= 1.0
 Requires:	cheese >= 3.28
 Requires:	gdm >= 3.8.3
@@ -68,7 +67,7 @@ Requires:	gnome-tour >= 3.38
 %endif
 Requires:	gsettings-desktop-schemas >= 3.37.1
 Requires:	gtk4 >= 4.6
-Requires:	gtk-webkit5 >= 2.34.0
+Requires:	gtk-webkit6 >= 2.40.0
 Requires:	ibus >= 1.4.99
 Requires:	iso-codes
 Requires:	libadwaita >= 1.2
@@ -108,6 +107,9 @@ bezpieczny sposób przygotowania nowego systemu.
 rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
+
+# not supported by glibc (as of 2.37)
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
 
 %find_lang %{name}
 
