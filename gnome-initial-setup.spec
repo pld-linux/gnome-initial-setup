@@ -8,7 +8,7 @@ Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
 Version:	44.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-initial-setup/44/%{name}-%{version}.tar.xz
@@ -61,6 +61,7 @@ Requires:	geoclue2 >= 2.3.1
 Requires:	glib2 >= 1:2.63.1
 Requires:	gnome-desktop4 >= 42
 Requires:	gnome-online-accounts >= 3.0
+Requires:	gnome-session >= 1:44
 %ifarch %{ix86} %{x8664} aarch64
 # where available
 Requires:	gnome-tour >= 3.38
@@ -128,7 +129,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-shell/modes/initial-setup.json
 %{_datadir}/polkit-1/rules.d/20-gnome-initial-setup.rules
 %{_desktopdir}/gnome-initial-setup.desktop
-%{systemduserunitdir}/gnome-session.target.wants
+%{systemduserunitdir}/gnome-session.target.wants/gnome-initial-setup-copy-worker.service
+%{systemduserunitdir}/gnome-session.target.wants/gnome-initial-setup-first-login.service
 %{systemduserunitdir}/gnome-session@gnome-initial-setup.target.d
 %{systemduserunitdir}/gnome-initial-setup-copy-worker.service
 %{systemduserunitdir}/gnome-initial-setup-first-login.service
