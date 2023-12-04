@@ -7,17 +7,16 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	44.0
-Release:	2
+Version:	45.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-initial-setup/44/%{name}-%{version}.tar.xz
-# Source0-md5:	16d6e7a4f943c3efd46979140126327b
+Source0:	https://download.gnome.org/sources/gnome-initial-setup/45/%{name}-%{version}.tar.xz
+# Source0-md5:	9e6df46ee675cc89e98064fbd1a10c12
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 2:1.2
 BuildRequires:	accountsservice-devel
-BuildRequires:	cheese-devel >= 3.28
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdm-devel >= 3.8.3
 BuildRequires:	geoclue2-devel >= 2.3.1
@@ -55,7 +54,6 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	NetworkManager >= 2:1.2
 Requires:	NetworkManager-gtk-lib >= 1.0
-Requires:	cheese >= 3.28
 Requires:	gdm >= 3.8.3
 Requires:	geoclue2 >= 2.3.1
 Requires:	glib2 >= 1:2.63.1
@@ -82,6 +80,7 @@ Requires:	pango >= 1:1.32.5
 Requires:	polkit >= 0.103
 Requires:	rest1 >= 0.9
 Requires:	systemd-units >= 1:242
+Requires:	tecla
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -125,6 +124,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/gnome-initial-setup
 %attr(755,root,root) %{_libexecdir}/gnome-initial-setup-copy-worker
 %attr(755,root,root) %{_libexecdir}/gnome-initial-setup-goa-helper
+%{_datadir}/dconf/profile/gnome-initial-setup
+%{_datadir}/gnome-initial-setup
 %{_datadir}/gnome-session/sessions/gnome-initial-setup.session
 %{_datadir}/gnome-shell/modes/initial-setup.json
 %{_datadir}/polkit-1/rules.d/20-gnome-initial-setup.rules
