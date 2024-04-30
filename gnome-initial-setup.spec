@@ -7,26 +7,25 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	45.4.1
+Version:	46.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-initial-setup/45/%{name}-%{version}.tar.xz
-# Source0-md5:	b934408eb86601ea1f337ebd07b529dd
+Source0:	https://download.gnome.org/sources/gnome-initial-setup/46/%{name}-%{version}.tar.xz
+# Source0-md5:	1615199b668f6faf9c36922e489a1dc7
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 2:1.2
 BuildRequires:	accountsservice-devel
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdm-devel >= 3.8.3
-BuildRequires:	geoclue2-devel >= 2.3.1
+BuildRequires:	geoclue2-devel >= 2.6.0
 BuildRequires:	geocode-glib2-devel >= 3.26
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.63.1
 BuildRequires:	gnome-desktop4-devel >= 42
-BuildRequires:	gnome-online-accounts-devel >= 3.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.37.1
-BuildRequires:	gtk4-devel >= 4.6
+BuildRequires:	gtk4-devel >= 4.10
 BuildRequires:	gtk-webkit6-devel >= 2.40.0
 %{!?with_krb5:BuildRequires:	heimdal-devel}
 BuildRequires:	ibus-devel >= 1.4.99
@@ -55,17 +54,16 @@ BuildRequires:	xz
 Requires:	NetworkManager >= 2:1.2
 Requires:	NetworkManager-gtk-lib >= 1.0
 Requires:	gdm >= 3.8.3
-Requires:	geoclue2 >= 2.3.1
+Requires:	geoclue2 >= 2.6.0
 Requires:	glib2 >= 1:2.63.1
 Requires:	gnome-desktop4 >= 42
-Requires:	gnome-online-accounts >= 3.0
 Requires:	gnome-session >= 1:44
 %ifarch %{ix86} %{x8664} aarch64
 # where available
 Requires:	gnome-tour >= 3.38
 %endif
 Requires:	gsettings-desktop-schemas >= 3.37.1
-Requires:	gtk4 >= 4.6
+Requires:	gtk4 >= 4.10
 Requires:	gtk-webkit6 >= 2.40.0
 Requires:	ibus >= 1.4.99
 Requires:	iso-codes
@@ -123,7 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
 %attr(755,root,root) %{_libexecdir}/gnome-initial-setup
 %attr(755,root,root) %{_libexecdir}/gnome-initial-setup-copy-worker
-%attr(755,root,root) %{_libexecdir}/gnome-initial-setup-goa-helper
 %{_datadir}/dconf/profile/gnome-initial-setup
 %{_datadir}/gnome-initial-setup
 %{_datadir}/gnome-session/sessions/gnome-initial-setup.session
