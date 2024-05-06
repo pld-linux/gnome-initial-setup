@@ -7,12 +7,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	46.0
+Version:	46.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-initial-setup/46/%{name}-%{version}.tar.xz
-# Source0-md5:	1615199b668f6faf9c36922e489a1dc7
+# Source0-md5:	792d0a34432663770f2adefa141d6839
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 2:1.2
@@ -127,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome-shell/modes/initial-setup.json
 %{_datadir}/polkit-1/rules.d/20-gnome-initial-setup.rules
 %{_desktopdir}/gnome-initial-setup.desktop
-%{systemduserunitdir}/gnome-session.target.wants/gnome-initial-setup-copy-worker.service
+%{systemduserunitdir}/basic.target.wants/gnome-initial-setup-copy-worker.service
 %{systemduserunitdir}/gnome-session.target.wants/gnome-initial-setup-first-login.service
 %{systemduserunitdir}/gnome-session@gnome-initial-setup.target.d
 %{systemduserunitdir}/gnome-initial-setup-copy-worker.service
