@@ -1,4 +1,3 @@
-# TODO: gnome-initial-setup user (see data/gnome-initial-setup.conf)?
 #
 # Conditional build:
 %bcond_with	krb5		# MIT Kerberos 5 instead of Heimdal
@@ -8,7 +7,7 @@ Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
 Version:	46.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-initial-setup/46/%{name}-%{version}.tar.xz
@@ -51,6 +50,12 @@ BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	systemd-units >= 1:242
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+Requires(pre):	/bin/id
+Requires(pre):	/usr/bin/getgid
+Requires(pre):	/usr/sbin/groupadd
+Requires(pre):	/usr/sbin/useradd
+Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
 Requires:	NetworkManager >= 2:1.2
 Requires:	NetworkManager-gtk-lib >= 1.0
 Requires:	gdm >= 3.8.3
@@ -79,6 +84,8 @@ Requires:	polkit >= 0.103
 Requires:	rest1 >= 0.9
 Requires:	systemd-units >= 1:242
 Requires:	tecla
+Provides:	group(gnome-initial-setup)
+Provides:	user(gnome-initial-setup)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -114,6 +121,10 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%pre
+%groupadd -g 350 gnome-initial-setup
+%useradd -u 350 -d /run/gnome-initial-setup -s /bin/false -c "GNOME Initial Setup" -g gnome-initial-setup gnome-initial-setup
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc NEWS README.md
@@ -132,4 +143,4 @@ rm -rf $RPM_BUILD_ROOT
 %{systemduserunitdir}/gnome-session@gnome-initial-setup.target.d
 %{systemduserunitdir}/gnome-initial-setup-copy-worker.service
 %{systemduserunitdir}/gnome-initial-setup-first-login.service
-#%{_prefix}/lib/sysusers.d/gnome-initial-setup.conf
+/usr/lib/sysusers.d/gnome-initial-setup.conf
