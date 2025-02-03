@@ -6,12 +6,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	47.2
+Version:	47.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-initial-setup/47/%{name}-%{version}.tar.xz
-# Source0-md5:	e4239139b746d7d603e8a7177aab1b92
+# Source0-md5:	198ea2bf5f1f8b71d965716306da5293
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 2:1.2
@@ -100,7 +100,7 @@ bezpieczny sposób przygotowania nowego systemu.
 
 %prep
 %setup -q
-%{!?with_krb5:%patch0 -p1}
+%{!?with_krb5:%patch -P0 -p1}
 
 %build
 %meson build \
