@@ -6,12 +6,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	47.4
+Version:	47.5
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-initial-setup/47/%{name}-%{version}.tar.xz
-# Source0-md5:	198ea2bf5f1f8b71d965716306da5293
+# Source0-md5:	fba437d7dad36c24de6c9d5fe8d4d19f
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 2:1.2
@@ -46,7 +46,7 @@ BuildRequires:	pango-devel >= 1:1.32.5
 BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel >= 0.103
 BuildRequires:	rest1-devel >= 0.9
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	systemd-units >= 1:242
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -103,15 +103,15 @@ bezpieczny sposób przygotowania nowego systemu.
 %{!?with_krb5:%patch -P0 -p1}
 
 %build
-%meson build \
+%meson \
 	%{!?with_malcontent:-Dparental_controls=disabled}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 # not supported by glibc (as of 2.37)
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
