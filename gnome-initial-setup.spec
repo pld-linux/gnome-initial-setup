@@ -6,12 +6,12 @@
 Summary:	GNOME Initial Setup utility
 Summary(pl.UTF-8):	GNOME Initial Setup - narzędzie do wstępnej konfiguracji środowiska
 Name:		gnome-initial-setup
-Version:	47.5
+Version:	48.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/gnome-initial-setup/47/%{name}-%{version}.tar.xz
-# Source0-md5:	fba437d7dad36c24de6c9d5fe8d4d19f
+Source0:	https://download.gnome.org/sources/gnome-initial-setup/48/%{name}-%{version}.tar.xz
+# Source0-md5:	4c16cfe1a600af194584c88cc20ecdec
 Patch0:		%{name}-heimdal.patch
 URL:		https://wiki.gnome.org/Design/OS/InitialSetup
 BuildRequires:	NetworkManager-devel >= 2:1.2
@@ -24,7 +24,7 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.63.1
 BuildRequires:	gnome-desktop4-devel >= 42
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.37.1
-BuildRequires:	gtk4-devel >= 4.10
+BuildRequires:	gtk4-devel >= 4.17
 BuildRequires:	gtk-webkit6-devel >= 2.40.0
 %{!?with_krb5:BuildRequires:	heimdal-devel}
 BuildRequires:	ibus-devel >= 1.4.99
@@ -68,7 +68,7 @@ Requires:	gnome-session >= 1:44
 Requires:	gnome-tour >= 3.38
 %endif
 Requires:	gsettings-desktop-schemas >= 3.37.1
-Requires:	gtk4 >= 4.10
+Requires:	gtk4 >= 4.17
 Requires:	gtk-webkit6 >= 2.40.0
 Requires:	ibus >= 1.4.99
 Requires:	iso-codes
@@ -104,7 +104,9 @@ bezpieczny sposób przygotowania nowego systemu.
 
 %build
 %meson \
-	%{!?with_malcontent:-Dparental_controls=disabled}
+	-Dibus=enabled \
+	-Dparental_controls=%{__enabled_disabled malcontent} \
+	-Dwebkitgtk=enabled
 
 %meson_build
 
